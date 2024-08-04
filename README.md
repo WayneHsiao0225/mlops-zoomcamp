@@ -25,5 +25,14 @@ Build and evaluate a classification model that accurately predicts the probabili
 ### Evaluation Metric:
 The model will be evaluated based on accuracy, precision, recall, F1 score, and the Area Under the Receiver Operating Characteristic Curve (AUC-ROC) to balance the trade-off between false positives and false negatives.
 
-###
-Mlfow
+### Experiment tracking and model registry:
+#### MLfow
+conda env list
+conda activate finalproject
+mlflow --version
+python preprocess_data.py --raw_data_path .\data --dest_path ./output
+mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host 127.0.0.1 --port 5000
+python train.py --data_path ./output
+python hpo.py
+python register_model.py
+#### Prefect
